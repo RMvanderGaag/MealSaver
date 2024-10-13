@@ -12,23 +12,28 @@ public class MealPackageService(IMealPackageRepository mealPackageRepository, IS
 
         if (mealPackage == null || student == null)
         {
-            return "Meal package or student not found";
+            return "not-found";
         }
 
         if (mealPackage.ReservedBy != null)
         {
-            return "Meal package is already reserved";
+            return "already-reserved";
         }
 
         if(mealPackage.Is18Plus && student.Age < 18)
         {
-            return "Student is not 18+";
+            return "not-eighteen";
+        }
+        
+        if(mealPackageRepository.GetAllPackagesFromStudent(studentId).Any(s => s.PickupTimeFrom.Date == mealPackage.PickupTimeFrom.Date))
+        {
+            return "already-reservation-on-this-day";
         }
 
         mealPackage.ReservedBy = student;
         await mealPackageRepository.UpdateMealPackage(mealPackage);
 
-        return "Meal package reserved successfully";
+        return "success";
         
     }
 }

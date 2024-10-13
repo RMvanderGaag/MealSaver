@@ -11,10 +11,10 @@ public class Canteen
     public City City { get; set; }
     
     [Required]
-    public string Location { get; set; }
+    public Location Location { get; set; }
     
     [Required]
-    public bool OfferswarmMeals { get; set; }
+    public bool OffersWarmMeals { get; set; }
     
     public List<MealPackage> MealPackages { get; set; }
 }

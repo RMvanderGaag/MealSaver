@@ -1,10 +1,21 @@
 ﻿@page
-@model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="hero">
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-6">
+            <h3>The idea behind Meal Saver</h3>
+            <p>
+                A lot of food gets thrown away every day, and of course, that's a real shame. An idea had to be thought of, and quickly, to solve this problem. Many students living alone already have to pay a lot for their student housing, and on top of that, they also have to pay for expensive food. MealSaver offers a solution to these two problems. In collaboration with Avans, cafeterias can offer meal packages that students can pick up at a significant discount. This way, cafeterias don't have to throw away all that food, and students get a tasty meal.
+            </p>
+        </div>
+        <div class="col-6">
+            <img class="w-75 m-auto d-block" src="~/img/avanslogo.png"/>
+        </div>
+    </div>
 </div>

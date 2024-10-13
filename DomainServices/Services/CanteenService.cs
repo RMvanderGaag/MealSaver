@@ -13,18 +13,52 @@ public class CanteenService(IMealPackageRepository mealPackageRepository, IProdu
 
         if (products.Any(p => p.ContainsAlcohol)) mealPackage.Is18Plus = true;
         
-        if (await mealPackageRepository.CreateMealPackage(mealPackage)) return true;
-        return false;
-
+        return await mealPackageRepository.CreateMealPackage(mealPackage);
     }
 
-    public Task<bool> UpdateMealPackage(Guid mealPackageId, MealPackage mealPackage, IEnumerable<Guid> productIds)
-    {
-        throw new NotImplementedException();
+    public async Task<string> UpdateMealPackage(Guid mealPackageId, MealPackage mealPackage, IEnumerable<Guid> productIds)
+    {        
+        var products = productIds.Select(productRepository.GetProductById).ToList();
+        mealPackage.Products = products;
+
+        if (products.Any(p => p.ContainsAlcohol)) mealPackage.Is18Plus = true;
+        
+        var deleteResult = await DeleteMealPackage(mealPackageId);
+        
+        if (deleteResult != "Meal package deleted successfully")
+        {
+            return deleteResult;
+        }
+        
+        if (await mealPackageRepository.CreateMealPackage(mealPackage))
+        {
+            return "Meal package updated successfully";
+        }
+
+        return "Something went wrong while updating the meal package";
     }
 
-    public Task<bool> DeleteMealPackage(Guid mealPackageId)
+    public async Task<string> DeleteMealPackage(Guid mealPackageId)
     {
-        throw new NotImplementedException();
+        var mealPackage = mealPackageRepository.GetMealPackageById(mealPackageId);
+
+        if (mealPackage != null)
+        {
+            if (mealPackage.ReservedBy == null)
+            {
+                if(await mealPackageRepository.DeleteMealPackage(mealPackage))
+                {
+                    return "Meal package deleted successfully";
+                }
+            }
+            else
+            {
+                return "Meal package is reserved by a student";
+            }
+        }
+        
+        return "Meal package not found";
+        
+        
     }
 }

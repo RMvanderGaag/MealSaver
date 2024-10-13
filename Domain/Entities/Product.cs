@@ -14,4 +14,6 @@ public class Product
     
     [Required]
     public string Photo { get; set; }
+    
+    public ICollection<MealPackage> MealPackages { get; set; }
 }

@@ -1,0 +1,43 @@
+﻿@page
+@model MealSaver2._0.Pages.Account.ReservedMealPackagesModel
+
+<div class="container mt-5">
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header primary-color text-white">
+                <h4>My Reserved Meal Packages</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Meal Package</th>
+                            <th>Price</th>
+                            <th>Product amount</th>
+                            <th>Location</th>
+                            <th>Pickup time</th>
+                            <th>Meal type</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var mealPackage in Model.ReservedMealPackages)
+                        {
+                            <tr>
+                                <td>@mealPackage.DescriptiveName</td>
+                                <td>@mealPackage.Price</td>
+                                <td>@mealPackage.Products.Count</td>
+                                <td>@mealPackage.Canteen.City, @mealPackage.Canteen.Location</td>
+                                <td>(@mealPackage.PickupTimeFrom) - (@mealPackage.PickupTimeTill)</td>
+                                <td>@mealPackage.MealType</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

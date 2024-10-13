@@ -1,0 +1,24 @@
+﻿@page
+@model MealPackagesModel
+<div class="container mt-4">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @foreach (var p in Model.AllMealPackages)
+        {
+        <div class="col">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">@p.DescriptiveName</h5>
+                    <p class="card-subtitle mb-2 text-muted">Price: <span class="fw-bold">&euro; @p.Price</span></p>
+                    <p class="mb-1">Product amount: <span class="fw-bold">@p.Products.Count</span></p>
+                    <p class="mb-1">Location: <span class="fw-bold">@p.Canteen.City, @p.Canteen.Location</span></p>
+                    <p class="mb-3">Pickup till <span class="fw-bold">@p.PickupTimeTill</span></p>
+                    <div class="mt-auto">
+                        <a asp-page="MealPackageDetails" asp-route-id="@p.Id" class="btn secondary-color text-white w-100">Information</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+

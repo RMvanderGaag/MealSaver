@@ -1,0 +1,72 @@
+﻿@page "{id:guid}"
+@model MealPackageDetailsModel
+@{
+    var counter = 0;
+}
+
+<div class="container mt-4">
+    @if (!string.IsNullOrEmpty(Model.Message))
+    {
+    <div class="alert alert-info">
+        @Model.Message
+    </div>
+    }
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <h2 class="mb-3">@Model.MealPackage.DescriptiveName <b>@(Model.MealPackage.Is18Plus ? "(18+)" : "")</b></h2>
+
+            <h5 class="mb-3">Price: &euro; @Model.MealPackage.Price</h5>
+            <h5>Products:</h5>
+            <ul class="mb-3">
+                @foreach (var p in Model.MealPackage.Products)
+                {
+                <li>@p.DescriptiveName</li>
+                }
+            </ul>
+            <p><b>Location:</b> @Model.MealPackage.Canteen.City, @Model.MealPackage.Canteen.Location</p>
+            <p><b>Pickup from:</b> @Model.MealPackage.PickupTimeFrom</p>
+            <p><b>Pickup till:</b> @Model.MealPackage.PickupTimeTill</p>
+
+            @if (User.IsInRole("Student"))
+            {
+            @if (Model.MealPackage.ReservedById != null)
+            {
+            <button disabled="disabled" class="btn secondary-color text-white w-100 mt-3" type="submit">Reserved</button>
+            }
+            else
+            {
+            <form method="post" asp-route-id="@Model.MealPackage.Id">
+                <button class="btn secondary-color text-white w-100 mt-3" type="submit">Reserve Package</button>
+            </form>
+            }
+            }
+            else
+            {
+            <p>To reserve this package you need to <a asp-page="/Account/Login" class="text-secondary-color fw-bold">Login</a></p>
+            }
+        </div>
+
+        <div class="col-lg-6">
+            <div id="imageCarousel" class="carousel slide shadow-sm" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @foreach (var p in Model.MealPackage.Products)
+                    {
+                    <div class="carousel-item @(counter == 0 ? "active" : "")">
+                        <img class="d-block w-100" src="@p.Photo" alt="Product Image"/>
+                    </div>
+                    counter++;
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
