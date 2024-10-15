@@ -34,7 +34,7 @@ public class MealPackageRepository(MealSaverEFDBContext context) : IMealPackageR
 
     public IQueryable<MealPackage> GetAllCanteenPackages(CanteenEmployee canteenEmployee)
     {
-        return context.MealPackages.Include(c => c.Canteen)
+        return context.MealPackages.Include(c => c.Canteen).Include(p => p.Products)
             .Where(c => c.Canteen.Location == canteenEmployee.Canteen.Location)
             .OrderBy(m => m.PickupTimeTill);
     }

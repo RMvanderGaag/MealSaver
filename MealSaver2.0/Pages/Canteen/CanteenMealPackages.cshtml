@@ -1,0 +1,41 @@
+﻿@page
+@model MealSaver2._0.Pages.Canteen.CanteenMealPackagesModel
+
+<div class="container mt-4">
+    <!-- Buttons Section -->
+    <div class="d-flex justify-content-between mb-3">
+        <a asp-page="CreateMealPackage" class="btn secondary-color text-white">Create Meal Package</a>
+        <a asp-page-handler="CurrentCanteenPackages" class="btn secondary-color text-white">View My Canteen Meal Packages</a>
+        <a asp-page-handler="AllCanteenPackages" class="btn secondary-color text-white">View All Meal Packages</a>
+    </div>
+
+    <!-- Table Section -->
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Product Amount</th>
+            <th scope="col">Status</th>
+            <th scope="col">Date</th>
+            <th scope="col">Location</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var p in Model.MealPackages)
+        {
+        <tr>
+            <td>@p.DescriptiveName</td>
+            <td>@p.Products.Count</td>
+            <td>@(p.ReservedById == null ? "Available" : "Reserved")</td>
+            <td>@p.PickupTimeTill</td>
+            <td>@p.Canteen.City, @p.Canteen.Location</td>
+            <td>
+                <a asp-controller="Pakket" asp-action="PakketBewerken" class="btn btn-sm btn-warning">Edit</a>
+                <a asp-controller="Pakket" asp-action="PakketVerwijderen" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        }
+        </tbody>
+    </table>
+</div>

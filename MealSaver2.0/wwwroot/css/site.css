@@ -73,18 +73,6 @@ body {
   border-radius: 20px;
 }
 
-.table {
-  border-collapse: separate;
-  border-spacing: 0 10px;
-}
-
-td, th {
-  border: none;
-}
-
-td {
-  line-height: 50px;
-}
 
 .footer {
   position: absolute;

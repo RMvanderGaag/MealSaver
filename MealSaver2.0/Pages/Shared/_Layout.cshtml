@@ -22,33 +22,29 @@
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex">
                 <ul class="navbar-nav flex-grow-1 justify-content-end">
-                    @if (User.IsInRole("Administrator"))
-                    {
-                    <li class="nav-item mx-2">
-                        <a class="nav-link text-white" href="/MealPackage/MealPackages.cshtml">Inventaris</a>
-                    </li>
-                    <li class="nav-item mx-2">
-                        <a class="nav-link text-white" asp-action="Logout" asp-controller="Account">Logout</a>
-                    </li>
-                    }
-                    else
+                    @if (User.IsInRole("Student"))
                     {
                         <li class="nav-item mx-2">
                             <a class="nav-link text-white" asp-page="/MealPackage/MealPackages">Meals</a>
                         </li>
-                        
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <li class="nav-item mx-2">
-                                <a class="nav-link text-white" asp-page="/Account/AccountDetails">Account</a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item mx-2">
-                                <a class="nav-link text-white" asp-page="/Account/Login">Login</a>
-                            </li>
-                        }
+                    }else if (User.IsInRole("CanteenEmployee"))
+                    {
+                        <li class="nav-item mx-2">
+                            <a class="nav-link text-white" asp-page="/Canteen/CanteenMealPackages">Meals offered</a>
+                        </li>
+                    }
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item mx-2">
+                            <a class="nav-link text-white" asp-page="/Account/AccountDetails">Account</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item mx-2">
+                            <a class="nav-link text-white" asp-page="/Account/Login">Login</a>
+                        </li>
                     }
                 </ul>
             </div>

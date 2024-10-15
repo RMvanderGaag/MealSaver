@@ -1,0 +1,62 @@
+﻿@page
+@using Domain.Enums
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model MealSaver2._0.Pages.Canteen.CreateMealPackageModel
+@{
+    ViewData["Title"] = "Create Meal Package";
+}
+
+<div class="container mt-5">
+    <form method="post" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label asp-for="MealPackage.DescriptiveName" class="form-label">Descriptive Name</label>
+            <input asp-for="MealPackage.DescriptiveName" class="form-control" required />
+            <span asp-validation-for="MealPackage.DescriptiveName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Products</label>
+            <select asp-for="MealPackage.Products" class="form-control" multiple="multiple">
+                @foreach (var product in Model.Products)
+                {
+                <option value="@product">@product.DescriptiveName</option>
+                }
+            </select>
+            <span asp-validation-for="MealPackage.Products" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="MealPackage.PickupTimeTill" class="form-label">Pickup Time Till</label>
+            <input asp-for="MealPackage.PickupTimeTill" type="datetime-local" class="form-control" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" max="@DateTime.Now.AddDays(2).ToString("yyyy-MM-ddTHH:mm")" required />
+            <span asp-validation-for="MealPackage.PickupTimeTill" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <div class="form-check">
+                <input asp-for="MealPackage.Is18Plus" class="form-check-input" type="checkbox" />
+                <label asp-for="MealPackage.Is18Plus" class="form-check-label">18+ Check</label>
+            </div>
+            <span asp-validation-for="MealPackage.Is18Plus" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="MealPackage.Price" class="form-label">Price</label>
+            <input asp-for="MealPackage.Price" type="number" step="0.01" class="form-control" required />
+            <span asp-validation-for="MealPackage.Price" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="MealPackage.MealType" class="form-label">Meal Type</label>
+            <select asp-for="MealPackage.MealType" class="form-select">
+                <option value="">Select Meal Type</option>
+                @foreach (var type in Enum.GetValues(typeof(MealType)))
+                {
+                <option value="@type">@type</option>
+                }
+            </select>
+            <span asp-validation-for="MealPackage.MealType" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Meal Package</button>
+    </form>
+</div>
