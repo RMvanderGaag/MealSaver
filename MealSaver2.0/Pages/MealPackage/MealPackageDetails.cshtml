@@ -29,18 +29,18 @@
 
             @if (User.IsInRole("Student"))
             {
-            @if (Model.MealPackage.ReservedById != null)
-            {
-            <button disabled="disabled" class="btn secondary-color text-white w-100 mt-3" type="submit">Reserved</button>
+                if (Model.MealPackage.ReservedById != null)
+                {
+                <button disabled="disabled" class="btn secondary-color text-white w-100 mt-3" type="submit">Reserved</button>
+                }
+                else
+                {
+                <form method="post" asp-route-id="@Model.MealPackage.Id">
+                    <button class="btn secondary-color text-white w-100 mt-3" type="submit">Reserve Package</button>
+                </form>
+                }
             }
-            else
-            {
-            <form method="post" asp-route-id="@Model.MealPackage.Id">
-                <button class="btn secondary-color text-white w-100 mt-3" type="submit">Reserve Package</button>
-            </form>
-            }
-            }
-            else
+            else if(!User.Identity.IsAuthenticated)
             {
             <p>To reserve this package you need to <a asp-page="/Account/Login" class="text-secondary-color fw-bold">Login</a></p>
             }

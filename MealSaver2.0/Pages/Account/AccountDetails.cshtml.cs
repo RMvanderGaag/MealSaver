@@ -1,27 +1,27 @@
 ﻿using Domain;
+using Domain.Interface;
 using DomainServices.Repositories;
+using DomainServices.Services.Interface;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MealSaver2._0.Pages.Account;
 
-public class AccountDetailsModel(UserManager<IdentityUser> userManager, IStudentRepository studentRepository, SignInManager<IdentityUser> signInManager) : PageModel
+public class AccountDetailsModel(IUserService userService, SignInManager<IdentityUser> signInManager) : PageModel
 {
+    public IUserInfo user { get; set; }
     public Student Student { get; set; }
+    public CanteenEmployee CanteenEmployee { get; set; }
     
     public void OnGet()
     {
-        Student = GetAccountDetails().Result;
+        user = userService.GetLoggedInUserInfo(User).Result;
+
+        if (User.IsInRole("Student")) Student = user as Student ?? null;
+        else if(User.IsInRole("CanteenEmployee")) CanteenEmployee = user as CanteenEmployee ?? null;
     }
     
-    private async Task<Student> GetAccountDetails()
-    {
-        var userId = userManager.GetUserId(HttpContext.User);
-        var user = await userManager.FindByIdAsync(userId);
-        var student = studentRepository.GetStudentByEmail(user.Email);
-        return student;
-    }
     
     public async Task<IActionResult> OnPostLogoutAsync()
     {

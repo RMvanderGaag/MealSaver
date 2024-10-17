@@ -1,6 +1,36 @@
 ﻿@page
+@using Domain.Enums
 @model MealPackagesModel
 <div class="container mt-4">
+    <form method="get" asp-page="MealPackages">
+        <div class="row mb-4">
+            <div class="col-md-5">
+                <label for="locationFilter" class="form-label">Filter op Locatie:</label>
+                <select id="locationFilter" class="form-select" asp-for="SelectedLocation">
+                    <option value="-1" selected>Alle locaties</option>
+                    @foreach (var location in Enum.GetValues(typeof(Location)))
+                    {
+                    <option value="@(Convert.ToInt32(location))">@location</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-5">
+                <label for="mealTypeFilter" class="form-label">Filter op Type Maaltijd:</label>
+                <select id="mealTypeFilter" class="form-select" asp-for="SelectedMealType">
+                    <option value="-1" selected>Alle Maaltijdtype</option>
+                    @foreach (var type in Enum.GetValues(typeof(MealType)))
+                    {
+                    <option value="@(Convert.ToInt32(type))">@type</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">&nbsp;</label>
+                <button type="submit" class="btn secondary-color text-white w-100">Filter</button>
+            </div>
+        </div>
+    </form>
+
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         @foreach (var p in Model.AllMealPackages)
         {
@@ -21,4 +51,3 @@
         }
     </div>
 </div>
-

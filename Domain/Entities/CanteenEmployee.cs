@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Domain.Interface;
 
 namespace Domain;
 
-public class CanteenEmployee
+public class CanteenEmployee : IUserInfo
 {
     public Guid Id { get; set; }
     

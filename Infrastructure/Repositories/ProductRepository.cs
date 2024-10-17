@@ -15,4 +15,9 @@ public class ProductRepository(MealSaverEFDBContext context) : IProductRepositor
     {
         return context.Products.SingleOrDefault(product => product.Id == id);
     }
+
+    public List<Product> GetProductsByIds(ICollection<Guid> ids)
+    {
+        return context.Products.Where(product => ids.Contains(product.Id)).ToList();
+    }
 }

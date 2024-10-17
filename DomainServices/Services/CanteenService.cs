@@ -16,7 +16,7 @@ public class CanteenService(IMealPackageRepository mealPackageRepository, IProdu
         return await mealPackageRepository.CreateMealPackage(mealPackage);
     }
 
-    public async Task<string> UpdateMealPackage(Guid mealPackageId, MealPackage mealPackage, IEnumerable<Guid> productIds)
+    public async Task<bool> UpdateMealPackage(Guid mealPackageId, MealPackage mealPackage, IEnumerable<Guid> productIds)
     {        
         var products = productIds.Select(productRepository.GetProductById).ToList();
         mealPackage.Products = products;
@@ -25,17 +25,12 @@ public class CanteenService(IMealPackageRepository mealPackageRepository, IProdu
         
         var deleteResult = await DeleteMealPackage(mealPackageId);
         
-        if (deleteResult != "Meal package deleted successfully")
+        if (deleteResult != "success")
         {
-            return deleteResult;
+            return false;
         }
         
-        if (await mealPackageRepository.CreateMealPackage(mealPackage))
-        {
-            return "Meal package updated successfully";
-        }
-
-        return "Something went wrong while updating the meal package";
+        return await mealPackageRepository.CreateMealPackage(mealPackage);
     }
 
     public async Task<string> DeleteMealPackage(Guid mealPackageId)
@@ -44,20 +39,20 @@ public class CanteenService(IMealPackageRepository mealPackageRepository, IProdu
 
         if (mealPackage != null)
         {
-            if (mealPackage.ReservedBy == null)
+            if (mealPackage.ReservedById == null)
             {
                 if(await mealPackageRepository.DeleteMealPackage(mealPackage))
                 {
-                    return "Meal package deleted successfully";
+                    return "success";
                 }
             }
             else
             {
-                return "Meal package is reserved by a student";
+                return "already-reserved";
             }
         }
         
-        return "Meal package not found";
+        return "not-found";
         
         
     }

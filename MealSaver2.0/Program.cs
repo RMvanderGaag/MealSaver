@@ -13,6 +13,7 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<IMealPackageService, MealPackageService>();
 builder.Services.AddScoped<ICanteenService, CanteenService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<IMealPackageRepository, MealPackageRepository>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();

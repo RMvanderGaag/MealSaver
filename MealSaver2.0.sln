@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationServices", "ApplicationServices\ApplicationServices.csproj", "{0EAAAD3F-CDBB-4D42-BCF4-475B37C82E64}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealSaverAPI", "MealSaverAPI\MealSaverAPI.csproj", "{535CCF7C-F4CB-48D9-93D2-841EC2FB2E75}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{0EAAAD3F-CDBB-4D42-BCF4-475B37C82E64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EAAAD3F-CDBB-4D42-BCF4-475B37C82E64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EAAAD3F-CDBB-4D42-BCF4-475B37C82E64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{535CCF7C-F4CB-48D9-93D2-841EC2FB2E75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{535CCF7C-F4CB-48D9-93D2-841EC2FB2E75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{535CCF7C-F4CB-48D9-93D2-841EC2FB2E75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{535CCF7C-F4CB-48D9-93D2-841EC2FB2E75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

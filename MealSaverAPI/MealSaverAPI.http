@@ -1,0 +1,6 @@
+@MealSaverAPI_HostAddress = http://localhost:5042
+
+GET {{MealSaverAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

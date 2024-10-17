@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Domain.Enums;
+using Domain.Interface;
 
 namespace Domain;
 
-public class Student
+public class Student : IUserInfo
 {
     public Guid Id { get; set; }
     

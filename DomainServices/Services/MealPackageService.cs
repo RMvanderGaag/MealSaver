@@ -1,4 +1,6 @@
-﻿using DomainServices.Repositories;
+﻿using Domain;
+using Domain.Enums;
+using DomainServices.Repositories;
 using DomainServices.Services.Interface;
 
 namespace DomainServices.Services;
@@ -15,7 +17,7 @@ public class MealPackageService(IMealPackageRepository mealPackageRepository, IS
             return "not-found";
         }
 
-        if (mealPackage.ReservedBy != null)
+        if (mealPackage.ReservedById != null)
         {
             return "already-reserved";
         }
@@ -35,5 +37,25 @@ public class MealPackageService(IMealPackageRepository mealPackageRepository, IS
 
         return "success";
         
+    }
+
+    public IQueryable<MealPackage> FilterMealPackages(int location, int mealType)
+    {
+        var packages = mealPackageRepository.GetAllUnReservedMealPackages();
+        if (location == -1 && mealType != -1)
+        {
+            return packages.Where(p => (int)p.MealType == mealType);
+        }
+        if (location != -1 && mealType == -1)
+        {
+            return packages.Where(p => (int)p.Canteen.Location == location);
+        }
+        if (location != -1 && mealType != -1)
+        {
+            return packages.Where(p => (int)p.MealType == mealType)
+                .Where(p => (int)p.Canteen.Location == location);
+        }
+
+        return packages;
     }
 }

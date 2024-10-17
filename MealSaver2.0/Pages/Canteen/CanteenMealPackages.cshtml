@@ -2,14 +2,18 @@
 @model MealSaver2._0.Pages.Canteen.CanteenMealPackagesModel
 
 <div class="container mt-4">
-    <!-- Buttons Section -->
+    @if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <div class="alert alert-info">
+            @Model.Message
+        </div>
+    }
     <div class="d-flex justify-content-between mb-3">
         <a asp-page="CreateMealPackage" class="btn secondary-color text-white">Create Meal Package</a>
         <a asp-page-handler="CurrentCanteenPackages" class="btn secondary-color text-white">View My Canteen Meal Packages</a>
         <a asp-page-handler="AllCanteenPackages" class="btn secondary-color text-white">View All Meal Packages</a>
     </div>
 
-    <!-- Table Section -->
     <table class="table table-hover">
         <thead>
         <tr>
@@ -24,17 +28,17 @@
         <tbody>
         @foreach (var p in Model.MealPackages)
         {
-        <tr>
-            <td>@p.DescriptiveName</td>
-            <td>@p.Products.Count</td>
-            <td>@(p.ReservedById == null ? "Available" : "Reserved")</td>
-            <td>@p.PickupTimeTill</td>
-            <td>@p.Canteen.City, @p.Canteen.Location</td>
-            <td>
-                <a asp-controller="Pakket" asp-action="PakketBewerken" class="btn btn-sm btn-warning">Edit</a>
-                <a asp-controller="Pakket" asp-action="PakketVerwijderen" class="btn btn-sm btn-danger">Delete</a>
-            </td>
-        </tr>
+            <tr>
+                <td>@p.DescriptiveName</td>
+                <td>@p.Products.Count</td>
+                <td>@(p.ReservedById == null ? "Available" : "Reserved")</td>
+                <td>@p.PickupTimeTill</td>
+                <td>@p.Canteen.City, @p.Canteen.Location</td>
+                <td>
+                    <a asp-page-handler="EditMealPackage" asp-route-id="@p.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-page-handler="DeleteMealPackage" asp-route-id="@p.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
         }
         </tbody>
     </table>
