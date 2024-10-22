@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MealSaver2._0.Pages.MealPackage;
 
-public class MealPackagesModel(IMealPackageRepository mealPackageRepository, IMealPackageService mealPackageService) : PageModel
+public class MealPackagesModel(IMealPackageService mealPackageService) : PageModel
 {
     public IQueryable<Domain.MealPackage> AllMealPackages { get; set; }
     [BindProperty(SupportsGet = true)]

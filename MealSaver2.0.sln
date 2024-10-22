@@ -12,6 +12,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationServices", "Appl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealSaverAPI", "MealSaverAPI\MealSaverAPI.csproj", "{535CCF7C-F4CB-48D9-93D2-841EC2FB2E75}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealSaver.Tests", "MealSaver.Tests\MealSaver.Tests.csproj", "{E0F49C53-E102-4697-90E7-8C31F31E09B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Tests", "Domain.Tests\Domain.Tests.csproj", "{BDB2595E-E2C4-4A67-93AB-C8AE335551FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +46,13 @@ Global
 		{535CCF7C-F4CB-48D9-93D2-841EC2FB2E75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{535CCF7C-F4CB-48D9-93D2-841EC2FB2E75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{535CCF7C-F4CB-48D9-93D2-841EC2FB2E75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0F49C53-E102-4697-90E7-8C31F31E09B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0F49C53-E102-4697-90E7-8C31F31E09B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0F49C53-E102-4697-90E7-8C31F31E09B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0F49C53-E102-4697-90E7-8C31F31E09B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDB2595E-E2C4-4A67-93AB-C8AE335551FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDB2595E-E2C4-4A67-93AB-C8AE335551FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDB2595E-E2C4-4A67-93AB-C8AE335551FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDB2595E-E2C4-4A67-93AB-C8AE335551FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
